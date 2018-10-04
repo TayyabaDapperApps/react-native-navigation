@@ -12,6 +12,7 @@ import android.view.View;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.*;
 import com.reactnativenavigation.utils.CompatUtils;
+import com.reactnativenavigation.controllers.NavigationCommandsHandler;
 
 public abstract class SplashActivity extends AppCompatActivity {
     public static boolean isResumed = false;
@@ -61,6 +62,10 @@ public abstract class SplashActivity extends AppCompatActivity {
         if (NavigationApplication.instance.isReactContextInitialized()) {
             NavigationApplication.instance.getEventEmitter().sendAppLaunchedEvent();
             return;
+        }
+
+        if(NavigationActivity.currentActivity == null && NavigationCommandsHandler.didPreviouslyLaunch) {
+            finish();
         }
 
         // TODO I'm starting to think this entire flow is incorrect and should be done in Application
