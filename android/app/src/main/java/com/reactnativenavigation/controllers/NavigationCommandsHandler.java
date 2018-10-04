@@ -15,6 +15,8 @@ import java.util.*;
 
 public class NavigationCommandsHandler {
 
+private static Bundle savedParams;
+public static Boolean didPreviouslyLaunch = false;
     private static final String ACTIVITY_PARAMS_BUNDLE = "ACTIVITY_PARAMS_BUNDLE";
 
     static ActivityParams parseActivityParams(Intent intent) {
