@@ -16,12 +16,16 @@ import java.util.*;
 public class NavigationCommandsHandler {
 
     private static final String ACTIVITY_PARAMS_BUNDLE = "ACTIVITY_PARAMS_BUNDLE";
+    public static Boolean didPreviouslyLaunch = false;
 
     static ActivityParams parseActivityParams(Intent intent) {
         return ActivityParamsParser.parse(intent.getBundleExtra(NavigationCommandsHandler.ACTIVITY_PARAMS_BUNDLE));
     }
 
     public static void startApp(Bundle params, Promise promise) {
+        
+        didPreviouslyLaunch = true;
+        
         Intent intent = new Intent(NavigationApplication.instance, NavigationActivity.class);
         IntentDataHandler.onStartApp(intent);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
